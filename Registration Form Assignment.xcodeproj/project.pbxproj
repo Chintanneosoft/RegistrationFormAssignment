@@ -99,12 +99,10 @@
 		4ACD7FB92A73858D009F8419 /* Registration Form Assignment */ = {
 			isa = PBXGroup;
 			children = (
-				4ACD7FBA2A73858D009F8419 /* AppDelegate.swift */,
-				4ACD7FBC2A73858D009F8419 /* SceneDelegate.swift */,
-				4ACD7FBE2A73858D009F8419 /* RegistrationVC.swift */,
-				4ACD7FC02A73858D009F8419 /* Main.storyboard */,
+				4AE4E9772A8CD00000BBE7AB /* Application */,
+				4AE4E97A2A8CD03B00BBE7AB /* Controller */,
+				4AE4E97B2A8CD05500BBE7AB /* StoryBoard */,
 				4ACD7FC32A73858F009F8419 /* Assets.xcassets */,
-				4ACD7FC52A73858F009F8419 /* LaunchScreen.storyboard */,
 				4ACD7FC82A73858F009F8419 /* Info.plist */,
 			);
 			path = "Registration Form Assignment";
@@ -125,6 +123,32 @@
 				4ACD7FDD2A738590009F8419 /* Registration_Form_AssignmentUITestsLaunchTests.swift */,
 			);
 			path = "Registration Form AssignmentUITests";
+			sourceTree = "<group>";
+		};
+		4AE4E9772A8CD00000BBE7AB /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4ACD7FBC2A73858D009F8419 /* SceneDelegate.swift */,
+				4ACD7FBA2A73858D009F8419 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		4AE4E97A2A8CD03B00BBE7AB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4ACD7FBE2A73858D009F8419 /* RegistrationVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4AE4E97B2A8CD05500BBE7AB /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				4ACD7FC02A73858D009F8419 /* Main.storyboard */,
+				4ACD7FC52A73858F009F8419 /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
