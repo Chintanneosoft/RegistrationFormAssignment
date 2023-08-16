@@ -174,87 +174,30 @@ class RegistrationVC: UIViewController ,UIPickerViewDataSource, UIPickerViewDele
         else{
             
             //First Name Validation
-            if  let verifyText = tfFirstName.text{
-                
-                if verifyText.count < 3{
-                    alertmsg(msg: "First Name should be 3 charactors")
-                }
-            }
+            nameValidation(name: tfFirstName.text ?? "")
             
             //Last Name Validation
-            if let verifyText = tfLastName.text{
-                
-                if verifyText.count < 3{
-                    alertmsg(msg: "Last Name should be 3 charactors")
-                }
-            }
+            nameValidation(name: tfLastName.text ?? "")
             
             //Email Validation
-            if let verifyText = tfEmail.text{
-                
-                if verifyText.count < 3{
-                    alertmsg(msg: "Email Should Contain Atleast 3 letters")
-                }
-                let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-                let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
-                
-                if !emailPredicate.evaluate(with: verifyText) {
-                    alertmsg(msg: "Not Followed Standard Email Requirements")
-                }
-                
-            }
+            emailValidation(email: tfEmail.text ?? "")
             
             //Password Validation
-            if let verifyText = tfPassword.text{
-                
-                
-                if verifyText.count < 8{
-                    alertmsg(msg: "Password Should Contain Atleast 3 letters")
-                }
-                
-                var containsNumber = false
-                for character in verifyText {
-                    if character.isWholeNumber {
-                        containsNumber = true
-                        break
-                    }
-                }
-                if !containsNumber {
-                    alertmsg(msg: "Password Should Contain atleast one Number")
-                }
-                
-                var containsSpecialCharacter = false
-                let specialCharacters = ["@", "#", "%", "*", "(", ")", "<", ">", "/", "|", "{", "~", "?"]
-                for character in verifyText {
-                    if specialCharacters.contains(String(character)) {
-                        containsSpecialCharacter = true
-                        break
-                    }
-                }
-                if !containsSpecialCharacter {
-                    alertmsg(msg: "Password Should Contain atleast one Special Charactor")
-                }
-            }
+            passwordValidation(password: tfPassword.text ?? "")
             
             //Confirm Password Validation
-            if let verifyText = tfConfirmPassword.text{
-                
-                if verifyText != tfPassword.text{
-                    alertmsg(msg: "Confirm Password Should be same as Password")
-                }
-                
-            }
+            confirmPasswordValidation(cfPassword: tfConfirmPassword.text ?? "")
             
             // Printing Data
-            print(tfFirstName.text)
-            print(tfLastName.text)
-            print(tfPhoneNo.text)
-            print(tfEmail.text)
+            print(tfFirstName.text!)
+            print(tfLastName.text!)
+            print(tfPhoneNo.text!)
+            print(tfEmail.text!)
             print(maleRadio.isSelected ? "male" : "female")
-            print(tfPassword.text)
-            print(tfConfirmPassword.text)
-            print(tfEducation.text)
-            print(tfDOB.text)
+            print(tfPassword.text!)
+            print(tfConfirmPassword.text!)
+            print(tfEducation.text!)
+            print(tfDOB.text!)
             
             alertmsg(msg: "Registered Successfully")
         }
@@ -272,7 +215,65 @@ class RegistrationVC: UIViewController ,UIPickerViewDataSource, UIPickerViewDele
         self.present(alert, animated: true, completion: nil)
         
     }
+    
+    //MARK: - Validation Functions
+    func minCountValidation(cnt: Int,expCnt: Int){
+        if cnt < expCnt{
+            alertmsg(msg: "Minimum expected \(expCnt)")
+        }
+    }
+    
+    func nameValidation(name: String){
+        minCountValidation(cnt: name.count, expCnt: 3)
+    }
+    
+    func emailValidation(email: String){
+        
+        minCountValidation(cnt: email.count, expCnt: 3)
+        
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        if !emailPredicate.evaluate(with: email) {
+            alertmsg(msg: "Not Followed Standard Email Requirements")
+        }
+        
+    }
+    
+    func passwordValidation(password: String){
+        
+        minCountValidation(cnt: password.count, expCnt: 8)
+    
+        var containsNumber = false
+        for character in password {
+            if character.isWholeNumber {
+                containsNumber = true
+                break
+            }
+        }
+        if !containsNumber {
+            alertmsg(msg: "Password Should Contain atleast one Number")
+        }
+        
+        var containsSpecialCharacter = false
+        let specialCharacters = ["@", "#", "%", "*", "(", ")", "<", ">", "/", "|", "{", "~", "?"]
+        for character in password {
+            if specialCharacters.contains(String(character)) {
+                containsSpecialCharacter = true
+                break
+            }
+        }
+        if !containsSpecialCharacter {
+            alertmsg(msg: "Password Should Contain atleast one Special Charactor")
+        }
+    }
+    
+    func confirmPasswordValidation(cfPassword: String){
+        if tfPassword.text != cfPassword{
+            alertmsg(msg: "Confirm Password Should be same as Password")
+        }
+    }
 }
+
 
 //MARK: - TextField Delegate
 extension RegistrationVC: UITextFieldDelegate {
